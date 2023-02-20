@@ -12,14 +12,18 @@ const productSchema = new mongoose.Schema({
         required: [true, "Price is required field."],
         min: 0,
     },
+    sellerId : {
+        type: String,
+        required: [true, "Selller id is required."]
+    },
     description :{
         type: String,
         // required: [true, "provide description"],
     },
-    comments: {
+    photos : {
         type: Array
     },
-    ratings: {
+    reviews: {
         type: Array
     }
 }, {timestamps: true})

@@ -5,9 +5,17 @@ const orderSchema = mongoose.Schema({
         type: String,
         required: [true, "product id is required"]
     },
+    address : {
+        type: String,
+        required: [true, "address is required"]
+    },
     userId : {
         type: String,
         required: [true, "user id is required"]
+    },
+    sellerId : {
+        type: String,
+        required: [true, "seller id is required"]
     },
     paymentType : {
         type: String,
@@ -18,10 +26,6 @@ const orderSchema = mongoose.Schema({
         type: String,
         enum: ["pending", "compleed"],
         default: "pending"
-    },
-    address : {
-        type: String,
-        required: [true, "address is required"]
     },
     status : {
         type: String,
