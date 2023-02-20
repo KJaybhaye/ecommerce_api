@@ -18,6 +18,10 @@ const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 
+//swagger docs
+const swagger = require("swagger-ui-express");
+const yaml = require("yamljs");
+const yamlDoc = yaml.load("./swagger.yaml");
 
 // utils
 require('express-async-errors');
@@ -43,13 +47,17 @@ app.use(xss());
 // app use
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
-//security app use cors, helmet, limiter
 
-app.get("/", (req, res) =>{
-    res.send("<h1>Welcome!<!h1>");
-})
 
-//routes
+
+
+// routes
+app.get("/", (req, res) => {
+    res.send("<h1>E-Commerce Api</h1> <a href='./docs'>Go to Documentation</a>");
+});
+
+app.use("/docs", swagger.serve, swagger.setup(yamlDoc));
+
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/products", authMiddleware, prodRoute);
 app.use("/api/v1/orders", authMiddleware, orderRoute);
