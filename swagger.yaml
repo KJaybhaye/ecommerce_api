@@ -1,0 +1,599 @@
+openapi: 3.0.0
+info:
+  title: E_Commerce_API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://e-commerce-api-rju9.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  name: admin0
+                  email: admin0@gmail.com
+                  password: admin0
+                  userType: admin
+                  adminPassword: hjsojgsjkh
+            example:
+              name: admin0
+              email: admin0@gmail.com
+              password: admin0
+              userType: admin
+              adminPassword: hjsojgsjkh
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: admin0@gmail.com
+                  password: admin0
+            example:
+              email: admin0@gmail.com
+              password: admin0
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /products:
+    post:
+      tags:
+      - Product
+      summary: Add a Product
+      operationId: AddaProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddaProductRequest'
+              - example:
+                  name: productsell0
+                  price: 2
+            example:
+              name: productsell0
+              price: 2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Product
+      summary: Get all Products
+      operationId: GetallProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Proudct ID
+    get:
+      tags:
+      - Product
+      summary: Get one Product
+      operationId: GetoneProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Product
+      summary: Update a Product
+      operationId: UpdateaProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateaProductRequest'
+              - example:
+                  price: 14
+            example:
+              price: 14
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Product
+      summary: Remove a Product
+      operationId: RemoveaProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /products/{id}/review:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Proudct ID
+    post:
+      tags:
+      - Product
+      summary: Add a Review for a Product
+      operationId: AddaReviewforaProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/AddaReviewforaProductRequest'
+              - example:
+                  comment: comment 1
+                  rating: 3
+            example:
+              comment: comment 1
+              rating: 3
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Product
+      summary: Update a Review
+      operationId: UpdateaReview
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateaReviewRequest'
+              - example:
+                  comment: comment 1
+                  rating: 4
+            example:
+              comment: comment 1
+              rating: 4
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Product
+      summary: Delete a Review
+      operationId: DeleteaReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /account/wishlist/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Proudct ID
+    post:
+      tags:
+      - Account
+      summary: Add a Product to the Wishlist
+      operationId: AddaProducttotheWishlist
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Account
+      summary: Delete a Product from the Wishlist
+      operationId: DeleteaProductfromtheWishlist
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /account/cart/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Proudct ID
+    post:
+      tags:
+      - Account
+      summary: Add a Product to the Cart
+      operationId: AddaProducttotheCart
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Account
+      summary: Delete a Product from the Cart
+      operationId: DeleteaProductfromtheCart
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /orders/{pid}:
+    parameters:
+      - in: path
+        name: pid
+        schema:
+          type: string
+        required: true
+        description: The Proudct ID
+    post:
+      tags:
+      - Order
+      summary: Place a Order
+      operationId: PlaceaOrder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/PlaceaOrderRequest'
+              - example:
+                  address: ratnagiri
+            example:
+              address: ratnagiri
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /orders:
+    get:
+      tags:
+      - Order
+      summary: Get all Orders
+      operationId: GetallOrders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /orders/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Order ID
+    get:
+      tags:
+      - Order
+      summary: Get one Order
+      operationId: GetoneOrder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Order
+      summary: Update a Order
+      operationId: UpdateaOrder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateaOrderRequest'
+              - example:
+                  status: delivered
+            example:
+              status: delivered
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Order
+      summary: Delete a Order
+      operationId: DeleteaOrder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /images/upload:
+    post:
+      tags:
+      - Image
+      summary: Upload a Image
+      operationId: UploadaImage
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /images/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The image ID
+    get:
+      tags:
+      - Image
+      summary: Get Image  with Id
+      operationId: GetImagewithId
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      - userType
+      - adminPassword
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        userType:
+          type: string
+        adminPassword:
+          type: string
+      example:
+        name: admin0
+        email: admin0@gmail.com
+        password: admin0
+        userType: admin
+        adminPassword: hjsojgsjkh
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: admin0@gmail.com
+        password: admin0
+    AddaProductRequest:
+      title: AddaProductRequest
+      required:
+      - name
+      - price
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+      example:
+        name: productsell0
+        price: 2
+    UpdateaProductRequest:
+      title: UpdateaProductRequest
+      required:
+      - price
+      type: object
+      properties:
+        price:
+          type: integer
+          format: int32
+      example:
+        price: 14
+    AddaReviewforaProductRequest:
+      title: AddaReviewforaProductRequest
+      required:
+      - comment
+      - rating
+      type: object
+      properties:
+        comment:
+          type: string
+        rating:
+          type: integer
+          format: int32
+      example:
+        comment: comment 1
+        rating: 3
+    UpdateaReviewRequest:
+      title: UpdateaReviewRequest
+      required:
+      - comment
+      - rating
+      type: object
+      properties:
+        comment:
+          type: string
+        rating:
+          type: integer
+          format: int32
+      example:
+        comment: comment 1
+        rating: 4
+    PlaceaOrderRequest:
+      title: PlaceaOrderRequest
+      required:
+      - address
+      type: object
+      properties:
+        address:
+          type: string
+      example:
+        address: ratnagiri
+    UpdateaOrderRequest:
+      title: UpdateaOrderRequest
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: delivered
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Misc
+  description: ''
+- name: Auth
+  description: ''
+- name: Product
+  description: ''
+- name: Account
+  description: ''
+- name: Order
+  description: ''
+- name: Image
+  description: ''
