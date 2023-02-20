@@ -3,7 +3,8 @@ const express = require("express");
 
 const router = express.Router();
 
-router.route("/").post(placeOrder).get(getAllOrders);
+router.route("/").get(getAllOrders);
 router.route("/:id").get(getOrder).patch(updateOrder).delete(deleteOrder);
+router.route("/:pid").post(placeOrder);
 
 module.exports = router;
