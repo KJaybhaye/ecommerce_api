@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ["customer", "seller"],
+        enum: ["customer", "seller", "admin"],
         default: "customer"
     },
     email: {
@@ -26,6 +26,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"],
         minLength: 5
+    },
+    cart : {
+        type: Array
+    },
+    wishlist : {
+        type: Array
+    },
+    addresses : {
+        type: Array
     }
 }, {timestamps: true})
 
@@ -39,7 +48,7 @@ userSchema.methods.getName = function(){
 }
 
 userSchema.methods.getJWT = function(){
-    return jwt.sign({userId: this._id, name: this.name, userId: this.userType}, process.env.SECRET_KEY, {expiresIn: process.env.TOKEN_LIFE})
+    return jwt.sign({userId: this._id, name: this.name, userType: this.userType}, process.env.SECRET_KEY, {expiresIn: process.env.TOKEN_LIFE})
 }
 
 userSchema.methods.comparePass = async function(pass){
