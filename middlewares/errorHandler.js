@@ -13,8 +13,7 @@ const errorHandler = (err, req, res, next) => {
     // }
     if(err.code && err.code == 11000){
         customError.msg = `Duplicate value for ${Object.keys(err.keyValue)} !`;
-        customError.statusCode = 400;
-        
+        customError.statusCode = 400; 
     }
     if(err.name === "ValidationError"){
         customError.msg = Object.values(err.errors).map((error) => error.message).join(",")
