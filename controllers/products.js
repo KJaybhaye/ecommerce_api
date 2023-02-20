@@ -118,8 +118,8 @@ const deleteReview = async (req, res, next) => {
     const {userId, userName, userType} = req.user;
     const {id: productId} = req.params;
     try {
-        const review = await Product.deleteOne({_id: productId, reviews: {postedBy: userId}}, {$pull: { reviews: {postedBy: userName}}});
-        if(review.deletedCount == 0){
+        const review = await Product.updateOne({_id: productId}, {$pull: { reviews: {postedBy: userId}}});
+        if(review.matchedCount == 0){
             return res.status(StatusCodes.NOT_FOUND).json({msg: "Review not found."})
         }
         res.status(StatusCodes.CREATED).json({msg: "Review deleted successfully."});
