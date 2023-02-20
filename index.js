@@ -4,12 +4,13 @@ const express = require("express");
 const authRoute = require("./routes/auth");
 const prodRoute = require("./routes/products");
 const orderRoute = require("./routes/orders");
-// const userRoute = require("./routes/users");
+const accountRoute = require("./routes/account");
+const imageRoute = require("./routes/images.js");
 
 //middlwares
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
-const authHeader = require("./middlewares/auth");
+const authMiddleware = require("./middlewares/auth");
 
 //security
 const cors = require("cors");
@@ -19,6 +20,7 @@ const cors = require("cors");
 require('express-async-errors');
 const connectDB = require("./db/connect");
 require("dotenv").config();
+
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -34,9 +36,10 @@ app.get("/", (req, res) =>{
 
 //routes
 app.use("/api/v1/auth", authRoute);
-// app.use("/api/v1/users", userRoute);
-app.use("/api/v1/products", authHeader, prodRoute);
-app.use("/api/v1/orders", authHeader, orderRoute);
+app.use("/api/v1/products", authMiddleware, prodRoute);
+app.use("/api/v1/orders", authMiddleware, orderRoute);
+app.use("/api/v1/account", authMiddleware, accountRoute);
+app.use("/api/v1/images", imageRoute)
 // app.use("/api/v1/");
 
 // error handler and not found middlwares
